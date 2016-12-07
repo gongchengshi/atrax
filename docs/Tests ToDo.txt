@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Find the hard upper-limit rate of frontier dequeues by making a simple frontier client that dequeues and enqueues arbitrary URLs as fast as possible and tracks the rate.
+-------------------------------------------------------------------------------
+Unit test URL extractors on many different files.
+-------------------------------------------------------------------------------
+Experiment with faster database solutions (SQL?) for storing/querying fixed crawled URL fields. (Everything but http headers). Especially if queries need to be done on the data in the main execution path of the fetcher.
+-------------------------------------------------------------------------------
+Study crawlers that work on map-reduce systems such as Nutch. Compare Atrax with Nutch 1.7 on AWS Elastic Map-Reduce.
+-------------------------------------------------------------------------------	
+Evaluate Crawler:
+	Go through errors and identify if they can be avoided and make fixes if possible.
+		Requeue URLs that might succeed after making changes.
+	Download as many URLs from Google and Bing as possible and see how many the crawler didn't find.
+	What does it look like in the server logs?
+	Is the burden spread evenly across the crawler instances?
+	Exceeding SimpleDB 1K limitation for attribute values?
+-------------------------------------------------------------------------------

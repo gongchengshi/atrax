@@ -1,0 +1,5 @@
+Generic Web Crawlers do things like:
+
+Only crawling down 5 levels (See: Crawling the Infinite Web; Baeza, Castillo)
+Prioritizing the frontier based on PageRank
+

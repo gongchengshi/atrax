@@ -1,0 +1,18 @@
+Fetcher algorithm plug-ins
+
+UrlTransformer
+   Given a URL transform the URL into another valid URL
+DuplicateUrlDetector
+   Given a URL determine if the URL is a duplicate or near-duplicate of another URL
+DuplicateContentDetector
+   Given the content of a URL determine if the URL is a duplicate or near-duplicate of another URL
+InfiniteWebDetector
+   Given an URL determine if following the URL will lead further into an infinite web.
+
+UrlExtractor(s)
+SetRobotExclusionReasons
+Downloader
+CacheClient
+LocalSeenUrls
+GlobalSeenUrls
+Logger

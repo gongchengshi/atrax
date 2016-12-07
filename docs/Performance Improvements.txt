@@ -1,0 +1,35 @@
+Performance is gained by having each fetcher focus on the most number domains that it can crawl within the crawl delay period.
+
+Full resource utilization is achieved by running many of these processes on a single machine. Experiement with this number. (Start with twice the number of cores.)
+
+
+Limits to performance:
+   The number of dequeue requests the frontier can handle.
+      Fixes:
+         Could decouple enqueues and dequeues into separate processes.
+         NIC is saturated and there are spare CPU cycles:
+            Use Reactor IO
+         Multi-thread frontier
+         NIC is saturated and CPU is maxed out:
+               Optimize Python code
+               Switch to Java/C++
+         NIC is still saturated and CPU is maxed out:
+            Move enqueue and dequeue processes to separate machines.
+            Run frontier processes on higher performance machine instance.
+
+   Cost of running fetchers.
+      The crawl budget is the ultimate constraint. Limits here drive other performance improvements.
+   
+   Time it takes to startup new fetchers.
+      Fixes:
+         Use prebuilt images.
+   
+   Fetcher machine NICs that are not fully utilized.
+      Fixes:
+         If there are unused CPU cycle: run more fetcher processes on the machine.
+            If the number of single threaded processes increase to much more than the number of cores this could incure OS scheduling overhead.
+               If this happens then smarter IO/CPU parallelization needs to be done (Perhaps using reactor IO?).
+         The CPU is maxed out
+            Fixes:
+               Optimize Python code
+               Switch to Java/C++

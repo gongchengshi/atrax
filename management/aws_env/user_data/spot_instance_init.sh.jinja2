@@ -1,0 +1,16 @@
+#!/bin/sh
+
+TAG_NAME={{ packages_tag_name }}
+MODULES={{ modules }}
+CRAWL_JOB={{ crawl_job }}
+EC2_INSTANCE_ID=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`
+REGION=us-west-2
+
+aws --region $REGION ec2 create-tags --resources $EC2_INSTANCE_ID --tags Key=$TAG_NAME,Value=$MODULES Key=CrawlJob,Value=$CRAWL_JOB
+
+# CloudWatch will shutdown the EC2 instance after all of the fetchers running on the instance have stopped.
+aws --region $REGION cloudwatch put-metric-alarm --alarm-name ${EC2_INSTANCE_ID}-LOW_NETWORK \
+    --alarm-description "Stop the instance when network in drops below 300 bytes in 5 minutes." \
+    --namespace "AWS/EC2" --dimensions Name=InstanceId,Value=$EC2_INSTANCE_ID --metric-name NetworkIn \
+    --statistic Sum --comparison-operator LessThanThreshold --threshold 300 --period 300 --evaluation-periods 1 \
+    --alarm-actions arn:aws:automate:$REGION:ec2:terminate

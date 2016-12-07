@@ -1,0 +1,60 @@
+Ways of detecting an error page that had an HTTP status code of 200.
+
+The most obvious metric is:
+These can be found later by looking at the pages that are being redirected to a lot and if those pages are identical to a lot of other pages.
+
+Features for machine learning for error page recognition:
+
+The number of times this page is the target of a redirect
+The number of times the target URL minus the query string is the target of a redirect
+Averaged over all proxies: Num redirects per proxy / the total number of pages requested by the proxy
+Of the proxies used how many of them have ever been blocked
+The number of pages that are exact duplicates of this page
+The unigrams of any H1 tag content
+The unigrams of the page text
+The text length
+The URL query string broken up by parameter
+The parameter names
+The URL filename (last portion of the path)
+The number of images on the page
+The number of links on the page
+The percentage of text that is over point 12 font
+The font size (or size category) of each unigram
+The response headers (one feature per header)
+Title length
+Title unigrams
+URL is contained in robots.txt
+Average Word Length
+Does the page contain a form?
+Does the page contain a mailto link?
+
+
+Label: The http status code that should be returned.
+
+
+
+Method:
+Manually find all the error page URLs and content in the repo that have a status code of 200
+Manually label them with the approriate status code
+
+Randomly choose (num error page URLs * 10) other pages with status code of 200
+Label them with 200
+
+Create the feature vectures for each URL.
+
+Split into development/training/test
+
+Choose a machine learning algorithm.
+
+Run the algorithm.
+
+Do cross validation if needed.
+
+
+
+Hard Errors may include:
+402
+403
+420
+429
+

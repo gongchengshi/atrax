@@ -1,0 +1,24 @@
+Problem 1:
+Given a list of all of the URLs with the given path and their corresponding fingerprints (MD5) and/or similarity measures. Determine if a resource is sufficiently unique to warrant crawling the resource without actually reading the resource and instead just looking at the URL.
+
+Problem 2:
+Given a list of all of the URLs with the given path and their corresponding fingerprints (MD5) and/or similarity measures and the content of a new page. Determine if the links on the page should be added to the frontier.
+
+Problem 3:
+Given a list of all of the URLs with the given path and their corresponding fingerprints and/or similarity measures. Create a URL transformation rule that transforms the URLs of resources with similar content to a single valid URL that resolves to an actual resource.
+
+
+
+Solutions to problem 1:
+A.) MD5 hash just the body text of html pages.
+   Pros:
+      Strips script tags.
+      Removes IDs that are contained in the HTML.
+      Removes most ads.
+   Cons:
+      Doesn't catch calendar traps.
+      Simple pages that are all or mostly non-text will appear as duplicates.
+         Think of a photo album where the pages are just pictures with the same text at the top or bottom. The photos won't be captured.
+
+B.) Run boilerplate on the page and then MD5 hash all HTML between the body tags.
+   

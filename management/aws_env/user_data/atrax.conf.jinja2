@@ -1,0 +1,11 @@
+start on runlevel [2345] and stopped cloud-final
+stop on runlevel [!2345]
+
+#console log
+
+pre-start script
+    MODULE_NAME={{ module_name }}
+    {{ update_module_script }}
+end script
+
+exec bash /usr/local/packages/{{ module_name }}/run.sh {{ crawl_job }}

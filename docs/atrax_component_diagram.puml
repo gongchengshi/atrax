@@ -1,0 +1,134 @@
+@startuml
+title Atrax Configuration Management System
+skinparam componentStyle uml2
+
+[Keeper Client] as KeeperClient
+database "Keeper DB" as KeeperDB
+
+() "HTTPS" as S3Https
+
+package "EC2 Instance (1)" as frontier {
+    [Upstart] as FrontierUpstart
+    FrontierUpstart <-- S3Https : Packages
+    [Frontier] <-- S3Https : Config
+}
+
+package "EC2 Spot Instance (*)" as fetcher {
+    [Upstart] as FetcherUpstart
+    FetcherUpstart <-- S3Https : Packages
+    [Fetcher] <-- S3Https : Config
+}
+
+package "EC2 Instance (1)" as velum {
+    [Upstart] as VelumUpstart
+    [VelumUpstart] <-- S3Https : Packages
+    [Velum]
+}
+
+S3Https -- [S3]
+
+[Deployment Script] as DeployScript
+[S3] <- [DeployScript]  : Packages
+
+() "SQL" as KeeperDbSql
+() "HTTPS" as KeeperHttps
+
+[EC2] <-- [Keeper] : Commands
+note top of EC2 : Frontier, Fetcher, and Velum \nuse EC2 to find peer machines
+[S3] <-- [Keeper] : Config
+
+KeeperDbSql - Keeper
+KeeperDB - KeeperDbSql
+
+KeeperHttps - Keeper
+KeeperHttps - KeeperClient
+
+newpage
+skinparam componentStyle uml2
+title Atrax Runtime System
+
+note "Frontier, Fetcher, and Velum use\nSNS to notify admin of problems." as Note2
+
+[Frontier]
+[Fetcher]
+database Redis as RedisDB
+[Velum]
+[Velum\nImporter] as VelumImporter
+database "Velum DB" as VelumDB
+database S3
+database SimpleDB
+[SQS]
+[DNS Server] as DnsServer
+cloud Web
+[SQS]
+
+() ZeroMQ as FrontierZMQ
+() ZeroMQ as VelumZMQ
+() Redis
+() SMTP
+() SQL as VelumDbSql
+() HTTPS as SimpleDbHttps
+() HTTPS as S3Https
+() HTTPS as SqsHttps
+() "HTTP(S)" as HTTP
+() DNS
+
+Velum - VelumZMQ
+VelumZMQ - Fetcher
+
+SimpleDB -- SimpleDbHttps
+SimpleDbHttps -- Fetcher
+
+SqsHttps - Frontier
+SQS - SqsHttps
+Fetcher -- SqsHttps
+
+S3Https -- Fetcher
+S3 -- S3Https
+
+Fetcher - HTTP
+HTTP - Web
+
+Fetcher -- FrontierZMQ
+FrontierZMQ -- Frontier
+
+Fetcher -- Redis
+Frontier - Redis
+Redis - RedisDB
+
+DnsServer -- DNS
+DNS -- Fetcher
+
+
+VelumDbSql - Velum
+VelumDB -- VelumDbSql
+VelumDbSql -- VelumImporter
+
+VelumImporter -- SMTP
+
+newpage
+title Web Research System
+skinparam componentStyle uml2
+
+database SimpleDB
+database S3
+database ElasticSearch
+database "Nereus DB" as NereusDB
+[Nereus\nWeb Client] as WebClient
+
+SimpleDB -- [Atrax]
+SimpleDB -- [Mimeo]
+SimpleDB -- [Cleaver]
+
+[Atrax] -- S3
+[Mimeo] -- S3
+S3 -- [Cleaver]
+
+ElasticSearch - [Nereus]
+[Nereus] -- NereusDB
+[Cleaver] - ElasticSearch
+
+[Mimeo] - WebClient
+[Nereus] - WebClient
+
+@enduml

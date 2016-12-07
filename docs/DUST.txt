@@ -1,0 +1,24 @@
+Examples of DUST (Different URLs with Similar Test). Redirects are not the same as DUST however learning a site's redirect rules can speed up a crawler.
+
+According to "Crawling in the DUST", Yossef
+
+https://news.google.com/news
+https://news.google.com/
+
+http://google.com/news
+http://news.google.com
+
+http://www.example.com/
+http://www.example.com/index.html
+
+http://www.example.com/story?id=num
+http://www.example.com/story_num
+
+http://www.example.com/
+https://www.example.com/
+
+http://www.example.com/?unused_param=1
+http://www.example.com/?unused_param=2
+http://www.example.com/
+
+

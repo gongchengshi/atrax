@@ -1,0 +1,12 @@
+class FrontierClient:
+    def __init__(self, coordination_id, location):
+        pass
+
+    def dequeue(self):
+        pass
+
+    def enqueue(self, url_info):
+        pass
+
+    def delete(self, msg_id):
+        pass

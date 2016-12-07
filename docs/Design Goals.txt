@@ -1,0 +1,12 @@
+Run in cloud for scalability
+Storage in cloud
+Anonymity
+Robot Exclusion Standard
+Fast
+Inexpensive
+
+Frontier Size
+How CPUs are being used
+How many machines/NICs are being used
+
+

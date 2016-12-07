@@ -1,0 +1,13 @@
+01) Dequeue URL from frontier.
+02) Check if the URL should be fetched
+03) Fetch the URL
+04) Calculate the fingerprint of the contents
+05) Search the meta-data database for a URL with a matching fingerprint
+06) Extract URLs from the content and create URL objects from them.
+07) Apply URL transformations to each URL
+08) Determine if each URL should be fetched.
+09) Save URLs that should not be fetched
+10) Enqueue URLs into frontier
+11) Mark enqueued URLs seen
+12) Store the content to the repository
+13) Save the fetched URL

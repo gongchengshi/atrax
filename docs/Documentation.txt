@@ -1,0 +1,7 @@
+There are four ways to reduce hitting a website.  These can also be combined together to further reduce the crawler's activity on a single site.
+
+Combine more sites into a single frontier queue.
+Reduce the number of crawler instances serviceing the frontier queue.
+Increase the crawl delay on the instance serviceing the frontier queue.
+Create multiple crawler instances, each using a different proxy service.
+

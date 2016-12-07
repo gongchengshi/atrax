@@ -1,0 +1,12 @@
+This crawler behaves like a normal web crawler and does not try to mimic a web browser in any way.
+It downloads every resource from a set of domains in order to clone the site for other applications
+such as indexing, searching, scraping, and link analysis.
+
+fetcher.py is single threaded for the most part and does very little non-blocking I/O.
+
+This crawler instance is designed to be deployed on a single computing instance. Any number of crawler instances
+may be deployed - each on their own computing instance.  Each instance has its own User-Agent and has no knowledge of
+other instances in operation.  All instances for a crawl job share the same frontier.
+
+The crawler must be initialized using CrawlJobInitializer and the Frontier manager must be started before this script
+can run.

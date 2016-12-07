@@ -1,0 +1,75 @@
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Enable SSL Certificate verification?
+-------------------------------------------------------------------------------
+'emit_metrics' is never entered in remote_frontier.py
+-------------------------------------------------------------------------------
+Why is crawler fetching URLs that have already been crawled as evidenced in logs and metrics?
+-------------------------------------------------------------------------------
+Submit fix to boto bug in k.get_contents_as_filename(): Erroneously deletes file if it already exists and there is a 304.
+-------------------------------------------------------------------------------
+Fix boto documentation for set_attribute
+http://boto.readthedocs.org/en/latest/ref/sqs.html#module-boto.sqs.queue
+-------------------------------------------------------------------------------
+Write script to delete unused metrics and metric data
+-------------------------------------------------------------------------------
+Fix redundant SNS subscription notification issue
+-------------------------------------------------------------------------------
+Automate terminating unused spot-instances:
+https://forums.aws.amazon.com/message.jspa?messageID=601951
+-------------------------------------------------------------------------------
+Stop Frontier and Fetcher using signals / ctrl+c
+   The timers may be distrupting this
+-------------------------------------------------------------------------------
+There is a limit to the number of spot instance requests allowed per region:
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-limits.html
+Use on-demand instances or use a different region if this limit is hit.
+-------------------------------------------------------------------------------
+Put all instances of crawl job in a single AWS VPC? - this may limit which availability zones can use used for spot instances bids but it may also speed up communication with Redis and Frontier
+-------------------------------------------------------------------------------
+Delete LOW_NETWORK CloudWatch alarm when associated instance is terminated
+-------------------------------------------------------------------------------
+Get EC2 prices when frontier starts from https://a0.awsstatic.com/pricing/1/deprecated/ec2/pricing-on-demand-instances.json
+
+See also: http://forecastcloudy.net/2012/04/02/amazon-web-services-aws-ec2-pricing-data/
+-------------------------------------------------------------------------------
+Restart frontier if it stops unexpectedly?
+-------------------------------------------------------------------------------
+Restart first fetcher if it stops unexpectedly?
+-------------------------------------------------------------------------------
+Max request rate should be derived from the number of IP addresses for each host.
+-------------------------------------------------------------------------------
+Handle exceptions from apply_async by using the get() method on the returned object.
+	Keyboard interrupt isn't handled correctly when it interrupts a thread in the thread pool
+-------------------------------------------------------------------------------
+Store and crawl the content of error pages. The error pages often have URLs and content that could be of interest. The content should only be stored once for each type of error. This content page could be displayed in Mimeo for the error instead of Mimeo's error page?
+
+Do this by forcing an error on each new domain and one directory down and then storing the resulting URL and content.
+-------------------------------------------------------------------------------
+Extract URLs from more file types.
+-------------------------------------------------------------------------------
+Provide a list of url patterns that identify when a request is redirected to a soft error page (404 500, 503, 401, etc... page that returns http 200). Mark the UrlInfo object accordingly
+-------------------------------------------------------------------------------
+Add support for crawling login protected pages. Ensure that the crawler only logs in when absolutely necessary.
+-------------------------------------------------------------------------------
+Add support for <meta name="robots" content="noindex,nofollow"> 
+Treat rel="nofollow". content="nofollow", and X-Robots-Tag:nofollow the same as if the resource was included in robots.txt.
+Add support for Yandex's clean-param robots.txt directive
+Add support for no-follow https://support.google.com/webmasters/answer/96569?hl=en&ref_topic=4617741
+-------------------------------------------------------------------------------
+Enable multi-threaded writes to databases?
+-------------------------------------------------------------------------------
+When the number of total active queues is 1 can another fetcher be started if the fetch rate is low enough?
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+===============================================================================
+Required for Atrax Keeper:
+===============================================================================
+Store metrics displayed in Atrax Keeper
+-------------------------------------------------------------------------------
+Record performance - frontier-size, num-machines, num-cpus, num-fetchers, num-urls-found, num-urls-crawled, cost-per-hour.
+-------------------------------------------------------------------------------
+Store all URL trees in Neo4j so that queries like "nodes with most children" can be used to find infinite webs. This can be done by storing URL history in DynamoDB instead of SimpleDB and using AWS Lambda to store URLs in a Neo4j database.
+-------------------------------------------------------------------------------

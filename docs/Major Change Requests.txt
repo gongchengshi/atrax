@@ -1,0 +1,47 @@
+-------------------------------------------------------------------------------
+SERP detection?
+-------------------------------------------------------------------------------
+Store web graph in neo4j so that PageRank and other graph analysis can done.
+-------------------------------------------------------------------------------
+Switch from SimpleDB to DynamoDB
+-------------------------------------------------------------------------------
+Is it better to have the frontier or the fetcher do the redis SeenUrls check? It depends on which component has the most processing bandwidth.
+-------------------------------------------------------------------------------
+How to handle file that don't fit in virtual memory?
+-------------------------------------------------------------------------------
+It's possible for a queue message to cause a consumer to crash and get automatically placed back at the head of the queue to kill another consumer. Is there a way to do a dead letter queue in SQS.
+-------------------------------------------------------------------------------
+Implement a mechanism for priority crawling.
+-------------------------------------------------------------------------------
+Add support for cannonical in links https://support.google.com/webmasters/answer/139066?hl=en&ref_topic=4617741
+-------------------------------------------------------------------------------
+Is there a way to determine how much load a server can take in order to pick a max requests/minute threshhold per domain?
+-------------------------------------------------------------------------------
+Add support for .swf in SwfObject and other swf inclusion methods.
+-------------------------------------------------------------------------------
+Provide a list of path patterns to crawl but not store/index.  
+	- The purpose is to only look for more links to pages matched by the path patterns to store.
+-------------------------------------------------------------------------------
+Support FTP and other protocol schemas
+-------------------------------------------------------------------------------
+Find URLs in javascript source files and script tags using regular expression. 
+	Flag the UrlInfo object as coming from javscript so that if it 404s it can mark 
+		it as a warning instead of an error and only try it once.
+Find URLs in the css in style attributes of elements.
+-------------------------------------------------------------------------------	
+Find URLs in Applets, Flash, Silverlight, etc...
+-------------------------------------------------------------------------------	
+Add malware detection to scan files when they are downloaded by the crawler and flag the files using S3 metadata.
+	Use pyClamd with ClamAV and Linux Malware Detect for malware detection.
+-------------------------------------------------------------------------------
+Create a third-party hosted web site for each user-agent.
+-------------------------------------------------------------------------------
+Create a webpage for each user-agent string with some story about the use of the user agent crawler.
+	The stories should be that they are many third-party web crawling service like Connotate or some of the other third-party crawlers	
+-------------------------------------------------------------------------------
+Re-implement fetcher in C++ using Boost ASIO or at least change the threading model to use the reactor pattern.
+
+Make frontier client/fetcher to EC2 instance one-to-one.
+-------------------------------------------------------------------------------
+Implement a crawler using PhantomJS to imitate a browser and execute javascript to get more resources.
+-------------------------------------------------------------------------------

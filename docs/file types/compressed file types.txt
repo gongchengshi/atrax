@@ -1,0 +1,11 @@
+.zip, .zipx	application/zip	ZIP
+.rar	application/x-rar-compressed	RAR
+.7z	application/x-7z-compressed	7z
+.tar	application/x-tar	Tape archive
+.tar.gz, .tgz, .tar.Z, .tar.bz2, .tbz2, .tar.lzma, .tlz	application/x-gtar	tar with gzip, compress, bzip2, or lzma
+.gz	application/x-gzip	gzip
+.bz2	application/x-bzip2	bzip2
+.lz	application/x-lzip	lzip
+.lzma	application/x-lzma	lzma
+.cab	application/vnd.ms-cab-compressed	Cabinet
+.a, .ar		Unix Archiver

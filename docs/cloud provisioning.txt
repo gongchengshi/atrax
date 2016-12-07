@@ -1,0 +1,20 @@
+http://calculator.s3.amazonaws.com/index.html#r=PDX&s=EC2&key=calc-62612936-ECFC-4910-8E73-046ACC9F15C4
+
+For each crawl job:
+
+If not already started:
+Create an m3.medium EC2 instance for redis and frontier (The proxy is independant of any individual crawl job)
+Create as many spot instances as possible given the remaining budget
+
+When Atrax is paused, terminate all spot instances, and stop Frontier and Proxy instances.
+
+Create packages for (SeenUrls, Frontier, and Fetcher) Have a watchdog service on the crawler image that checks to see if the packages have been updated. If so then download in install them.
+
+SeenUrls and Frontier should be on the same machine.
+All machines should run a fetcher but the priority should be set lower than Redis and Frontier on machines that are also running those processes.
+
+Use the instance tags to tell the instance which packages should be downloaded.
+
+When the instance starts up it first waits for the instance_type and crawl_job tag to be set.
+
+Fetcher should wait for proxy, seen urls, and frontier to be available before continuing
