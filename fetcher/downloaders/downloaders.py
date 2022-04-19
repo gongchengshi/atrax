@@ -39,7 +39,7 @@ class DownloaderBase(object):
 class CrawleraDownloader(DownloaderBase):
     def __init__(self, user_agent):
         self.session = requests.session()
-        self.session.auth = ('jmclain', 'Ev9mohge')
+        self.session.auth = ('', '')
         self.session.headers.update({USER_AGENT_HEADER: user_agent})
         self.session.headers.update(CommonHeaders)
         self.session.allow_redirects = False
